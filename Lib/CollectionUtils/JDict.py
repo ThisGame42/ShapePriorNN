@@ -1,7 +1,7 @@
 from typing import Hashable
 
 
-class j_dict(dict):
+class JDict(dict):
     """
         A wrapper around dict providing a few APIs that I think python should have provided.
     """

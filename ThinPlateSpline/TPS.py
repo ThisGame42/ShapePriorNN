@@ -96,7 +96,7 @@ def tps_sparse(theta, ctrl, xy):
     return xy + z.view(N, M, 2)
 
 def uniform_grid(shape):
-    '''Uniformly places control points aranged in grid accross normalized image coordinates.
+    '''Uniformly places control points aranged in grid across normalized image coordinates.
     
     Params
     ------
@@ -113,14 +113,3 @@ def uniform_grid(shape):
     c[..., 0] = torch.linspace(0, 1, W)
     c[..., 1] = torch.linspace(0, 1, H).unsqueeze(-1)
     return c
-
-if __name__ == '__main__':
-    c = torch.tensor([
-        [0., 0],
-        [1., 0],
-        [1., 1],
-        [0, 1],
-    ]).unsqueeze(0)
-    theta = torch.zeros(1, 4+3, 2)
-    size= (1,1,6,3)
-    print(tps_grid(theta, c, size).shape)

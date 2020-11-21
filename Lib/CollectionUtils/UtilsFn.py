@@ -6,7 +6,7 @@ import os
 from typing import List
 
 
-class file_helper(object):
+class FileHelper(object):
     """
         A normal file helper util class.
     """
@@ -14,7 +14,7 @@ class file_helper(object):
     @staticmethod
     def bulk_move_to(files: list, dest_dir: str) -> None:
         for f in files:
-            file_helper._move_to(f, dest_dir)
+            FileHelper._move_to(f, dest_dir)
 
     @staticmethod
     def _move_to(f: str, dest_dir: str) -> None:
