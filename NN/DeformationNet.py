@@ -44,13 +44,3 @@ class DeformationNet(torch.nn.Module):
         theta = self.loc(feature.view(x.shape[0], -1)).view(-1, self.n_param, 2)
         grid = tps.tps_grid(theta, self.ctrl, (x.shape[0], ) + self.out_shape)
         return F.grid_sample(prior, grid, align_corners=False), theta
-
-
-
-def test():
-    x = torch.randn(1, 2, 400, 400)
-
-    model = DeformationNet((1, 400, 400))
-
-    y = model(x)
-    print(f"The shape of output is {y[0].size()} and the parameters have the shape of {y[1].size()}")
