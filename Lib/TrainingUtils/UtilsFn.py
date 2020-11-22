@@ -1,8 +1,13 @@
+import os
 import torch
+import numpy as np
 import torch.nn.functional as F
-
+import matplotlib.pyplot as plt
 
 from Lib.CollectionUtils.JList import JList
+
+
+from Lib.FileUtils.UtilsFn import FileHelper
 
 
 def to_onehot(labels: torch.Tensor, num_classes: int = 3, is_3d: bool = False) -> torch.Tensor:
@@ -47,3 +52,17 @@ def save_weights(model, path) -> None:
 
 def plot_loss(loss_t, loss_v, path) -> None:
     num_epochs = len(loss_t)
+    # Output Running Loss
+    X = np.arange(1, num_epochs, 1)
+    Y = loss_t
+    Y1 = loss_v
+    plt.title("Running Loss")
+    plt.plot(X, Y, label="Training Loss")
+    plt.plot(X, Y1, label="Validation Loss")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.legend()
+    dir, fname = os.path.split(path)
+    FileHelper.make_dir_if_none(dir)
+    plt.savefig(path)
+    plt.cla()

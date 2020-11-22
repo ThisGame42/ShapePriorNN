@@ -1,6 +1,7 @@
 import numpy as np
 
 
+from functools import reduce
 from typing import Any
 
 class JList(list):
@@ -18,7 +19,7 @@ class JList(list):
     def get_item(self, idx:int) -> Any:
         return self.__getitem__(idx)
 
-    def first_n_items(self, idx, first_n) -> Any:
+    def first_n_items_nested(self, idx, first_n) -> Any:
         item = self.get_item(idx)
         return item[:first_n]
 
@@ -26,11 +27,8 @@ class JList(list):
         """
             Returns the mean of all the elements in this list in float.
         """
-        sum = 0.
-        length = self.__len__()
-        for i in range(length):
-            sum += float(self.__getitem__(i))
-        return sum / length
+        sum = reduce(lambda a, b: float(a) + float(b), self)
+        return sum / self.__len__()
 
     def to_np(self, datatype: str = None) -> np.array:
-        return np.array(self) if datatype is None else np.array(self, datatype)
+        return np.array(self) if datatype is None else np.array(self, dtype=datatype)

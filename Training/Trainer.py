@@ -13,6 +13,14 @@ from NN.DeformationNet import DeformationNet
 from Data.Dataset.MuscleDataset import MuscleDataset
 
 
+class Trainer(object):
+    def __init__(self, config):
+        self.config = config
+
+    def run(self):
+        start_training(self.config)
+
+
 def start_training(config):
     num_epochs = config.epochs
     img_size = config.img_size
@@ -62,7 +70,6 @@ def start_training(config):
 
     save_weights(model, config.path_model)
 
-    # implement me!
     plot_loss(loss_t=running_loss_t,
               loss_v=running_loss_v,
-              path=config.plot_path)
+              path=config.path_plot)
